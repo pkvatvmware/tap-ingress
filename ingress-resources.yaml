@@ -48,14 +48,30 @@ spec:
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
 metadata:
-  name: accelerator
-  namespace: accelerator-system
+  name: api-portal-server
+  namespace: api-portal
 spec:
   virtualhost:
-    fqdn: #@ "accelerator.{}".format(data.values.domain)
+    fqdn: #@ "api-portal.{}".format(data.values.domain)
     tls:
       secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
   routes:
     - services:
-        - name: acc-ui-server
-          port: 80
+        - name: api-portal-server
+          port: 8080
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: learning-center
+  namespace: learning-center-guided-ui
+spec:
+  virtualhost:
+    fqdn: #@ "learning-center.{}".format(data.values.domain)
+    tls:
+      secretName: #@ "{}/{}".format(data.values.tls.namespace,data.values.tls.secretName)
+  routes:
+    - services:
+        - name: learningcenter-portal
+          port: 8080
+

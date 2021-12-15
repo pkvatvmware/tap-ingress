@@ -1,6 +1,6 @@
 #@data/values
 ---
-domain: tap.example.com
+domain: env3.tapdemo.vmware.com
 tls:
-  secretName: tls
-  namespace: tanzu-system-ingress
+  secretName: tls-cert
+  namespace: tap-secrets
